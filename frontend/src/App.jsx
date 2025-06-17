@@ -1,40 +1,24 @@
-import { useState } from "react";
+import FileUpload from './components/FileUpload'
+import CodeAnalysis from './components/CodeAnalysis'
 
 function App() {
-  const [file, setFile] = useState(null);
-
-  const handleUpload = async () => {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    const res = await fetch("http://localhost:8000/api/analyze/upload", {
-      method: "POST",
-      body: formData,
-    });
-
-    const json = await res.json();
-    alert("Upload success: " + JSON.stringify(json));
-  };
-
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
-      <h1 className="text-2xl mb-6">RefactAI Frontend</h1>
-
-      <input
-        type="file"
-        accept=".zip"
-        onChange={(e) => setFile(e.target.files[0])}
-        className="mb-4"
-      />
-
-      <button
-        onClick={handleUpload}
-        className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 transition"
-      >
-        Upload Codebase
-      </button>
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-white shadow">
+        <div className="max-w-7xl mx-auto py-6 px-4">
+          <h1 className="text-3xl font-bold text-gray-900">RefactAI</h1>
+        </div>
+      </header>
+      <main>
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <div className="space-y-8">
+            <FileUpload />
+            <CodeAnalysis />
+          </div>
+        </div>
+      </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
